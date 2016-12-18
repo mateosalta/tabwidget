@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=tabwidget
+Exec=qmlscene $@ Main.qml
+Icon=tabwidget.png
+Terminal=false
+Type=Application
+X-Ubuntu-Touch=true
+

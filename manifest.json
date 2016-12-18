@@ -1,0 +1,17 @@
+{
+    "name": "tabwidget.mateo-salta",
+    "description": "description of tabwidget",
+    "architecture": "all",
+    "title": "tabwidget",
+    "hooks": {
+        "tabwidget": {
+            "apparmor": "tabwidget.apparmor",
+            "desktop":  "tabwidget.desktop"
+        }
+    },
+    "version": "0.1",
+    "maintainer": "Mateo Salta <mateo_salta@yahoo.com>",
+    "framework" : "ubuntu-sdk-15.04"
+}
+
+
