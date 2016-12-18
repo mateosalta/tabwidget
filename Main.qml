@@ -90,24 +90,57 @@ Item {
         ///
                 model: stack.children.length
                 delegate: Rectangle {
-                    width: tabWidget.width / stack.children.length; height: 150
+                    width: tabWidget.width / stack.children.length; height: units.gu(5)
 
                     Rectangle {
                         width: parent.width; height: 1
                         anchors { bottom: parent.bottom; bottomMargin: 1 }
                         color: "#acb2c2"
 
-                    }
 
+                    }
+                    ActionBar {
+                               height: units.gu(4.7)
+                               id: nav
+    z: 10000
+                        anchors {
+                        top: parent.top
+                                       horizontalCenter: parent.horizontalLeft
+                                       }
+
+                        width: units.gu(7)
+                 numberOfSlots: 2
+                 actions: [
+                     Action {
+                        iconName: "go-next"
+                        text: "Foward"
+                         onTriggered: {
+                                   webview.goFoward()
+                                }
+                    },
+                      Action {
+                         iconName: "back"
+                         text: "Back"
+                          onTriggered: {
+                                     webview.goBack()
+                                 }
+                     }
+
+                 ]
+             }
                     TextField {
+
                     id: textField
             objectName: "addressBarTextField"
                         horizontalAlignment: Qt.AlignHCenter; verticalAlignment: Qt.AlignVCenter
                         anchors.fill: parent
-                       text: myUrl
+
+     //////////////////////              //Text box text here?
+                       text: "Google"
                         font.bold: tabWidget.current == index
                         inputMethodHints : Qt.ImhUrlCharactersOnly
                         renderType : Text.NativeRendering
+
 
                     }
 
@@ -116,7 +149,7 @@ Item {
                         anchors.fill: parent
 
 
-                        enabled: !addressbarTextField.activeFocus
+                        enabled: !TextField.activeFocus
             onClicked: {
                 textField.forceActiveFocus()
                 textField.selectAll()
@@ -125,7 +158,8 @@ Item {
                     }
 
                     Keys.onReturnPressed: {
-
+webview.url = 'http://' + textField.text
+                        textField.text = textField.text
                     textField.accepted()
                  }
 
@@ -149,7 +183,7 @@ Item {
 //property string myUrl: textField
 
 
-        property string title: myUrl
+        property string title: "Google"
         anchors.fill: parent
         color: "#e3e3e3"
 
@@ -168,7 +202,10 @@ Item {
                           }
                           width: parent.width
                           height: parent.height
-    url: myUrl
+
+    //////////////////////////////URL here
+                         //  url: textField.text
+                          url: "https://www.google.com"
 
                           preferences.localStorageEnabled: true
                           preferences.allowFileAccessFromFileUrls: true
@@ -178,41 +215,9 @@ Item {
                           filePicker: filePickerLoader.item
                 }
 
+
         }
     }
 
-    Rectangle {
-        property string title: "Google"
-        anchors.fill: parent
-        color: "#e3e3e3"
-
-        Rectangle {
-            anchors.fill: parent
-            color: "#7fff7f"
-            Text {
-                width: parent.width - 20
-                anchors.centerIn: parent; horizontalAlignment: Qt.AlignHCenter
-                text: "Flower stems are green"
-                font.pixelSize: 20
-                wrapMode: Text.WordWrap
-            }
-        }
-    }
-
-    Rectangle {
-        property string title: "Google"
-        anchors.fill: parent; color: "#e3e3e3"
-
-        Rectangle {
-            anchors.fill: parent; anchors.margins: 20
-            color: "#7f7fff"
-            Text {
-                width: parent.width - 20
-                anchors.centerIn: parent; horizontalAlignment: Qt.AlignHCenter
-                text: "Violets are blue"
-                font.pixelSize: 20
-                wrapMode: Text.WordWrap
-            }
-        }
-    } }
+ }
 }
